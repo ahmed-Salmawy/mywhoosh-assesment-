@@ -24,7 +24,9 @@ public class UserTokenRepoAdapterImpl extends
 
     @Override
     public String create(TokenDto dto) {
-        return null;
+        TokenEntity tokenEntity = mapper.toEntity(dto);
+        repository.save(tokenEntity);
+        return repository.save(tokenEntity).getId();
     }
 
     @Override
