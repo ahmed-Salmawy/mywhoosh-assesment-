@@ -37,7 +37,7 @@ public class StudentRepoImpl extends AbstractBaseRepo<StudentEntity, String> imp
 
         UnwindOperation unwindOperation = Aggregation.unwind("students_results");
 
-        SortOperation sortOperation = Aggregation.sort(Sort.Direction.ASC, "students_results.obtainedMarks");
+        SortOperation sortOperation = Aggregation.sort(Sort.Direction.DESC, "students_results.obtainedMarks");
 
         ProjectionOperation projectionOperation = Aggregation.project()
                 .and("name").as("name")

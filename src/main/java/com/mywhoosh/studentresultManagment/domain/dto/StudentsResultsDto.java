@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class StudentsResultsDto extends AbstractBaseDto {
 
     private String name;
-    private String rollNumber;
+    private Integer rollNumber;
     private String fatherName;
     private Integer grade;
     private String status;

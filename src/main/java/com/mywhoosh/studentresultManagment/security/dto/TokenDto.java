@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 public class TokenDto extends AbstractBaseDto {
     private UserDto user;
     private String token;

@@ -7,6 +7,7 @@ import com.mywhoosh.studentresultManagment.domain.enums.StatusEnum;
 import com.mywhoosh.studentresultManagment.domain.repoadapter.StudentRepoAdapter;
 import com.mywhoosh.studentresultManagment.domain.repoadapter.StudentResultRepoAdapter;
 import com.mywhoosh.studentresultManagment.domain.service.StudentResultManagementService;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -84,6 +85,12 @@ public class StudentResultManagementServiceImpl extends AbstractBaseService<Stud
 
 
         return studentDto.isPresent() ? "student deleted successfully" : "student not Found :(";
+    }
+
+    @Override
+    public StudentsResultsDto getStudentResults(@NotEmpty Integer rollNumber) {
+
+        return repoAdapter.getActiveStudentsWithResults().stream().filter(r -> r.getRollNumber().equals(rollNumber)).findAny().orElse(new StudentsResultsDto());
     }
 
 

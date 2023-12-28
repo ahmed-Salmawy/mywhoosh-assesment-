@@ -1,6 +1,7 @@
 package com.mywhoosh.studentresultManagment.security.repoadapter.impl;
 
 import com.mywhoosh.studentresultManagment.base.AbstractBaseRepoAdapter;
+import com.mywhoosh.studentresultManagment.presistance.entity.StudentEntity;
 import com.mywhoosh.studentresultManagment.presistance.entity.TokenEntity;
 import com.mywhoosh.studentresultManagment.security.dto.TokenDto;
 import com.mywhoosh.studentresultManagment.security.mapper.TokenMapper;
@@ -8,9 +9,10 @@ import com.mywhoosh.studentresultManagment.security.repo.TokenRepository;
 import com.mywhoosh.studentresultManagment.security.repoadapter.UserTokenRepoAdapter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Repository
@@ -37,12 +39,18 @@ public class UserTokenRepoAdapterImpl extends
 
     @Override
     public List<TokenDto> findAllValidTokenByUser(String userId) {
-        return null;
+        Map<String, Object> parameters = new HashMap();
+        parameters.put(TokenEntity.Fields.user, userId);
+        parameters.put(TokenEntity.Fields.expired, false);
+        return Optional.ofNullable(repository.findManyByMap(parameters))
+                .map(tokens ->
+                        tokens.stream().map(mapper::toDto).collect(Collectors.toList()))
+                .orElse(new LinkedList<>());
     }
 
     @Override
     public void saveAll(List<TokenDto> validUserTokens) {
-
+        repository.update(validUserTokens.stream().map(mapper::toEntity).collect(Collectors.toList()));
     }
 
     @Override

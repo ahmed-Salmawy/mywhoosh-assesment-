@@ -16,4 +16,6 @@ public interface StudentResultManagementService extends BaseService {
    List<StudentsResultsDto> getStudentsResults();
 
    String deleteStudent(DeleteStudentRequestDto deleteStudentRequestDto);
+
+   StudentsResultsDto getStudentResults(Integer rollNumber);
 }

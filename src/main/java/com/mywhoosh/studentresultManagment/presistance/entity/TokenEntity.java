@@ -3,13 +3,14 @@ package com.mywhoosh.studentresultManagment.presistance.entity;
 
 import com.mywhoosh.studentresultManagment.base.AbstractBaseEntity;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+import lombok.experimental.FieldNameConstants;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 
 @Document("user_tokens")
 @Data
+@FieldNameConstants
 public class TokenEntity extends AbstractBaseEntity {
 
 
