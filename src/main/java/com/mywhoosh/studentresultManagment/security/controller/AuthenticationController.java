@@ -28,17 +28,17 @@ public class AuthenticationController extends AbstractBaseController<Authenticat
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
+    public AuthenticationResponse register(
             @RequestBody RegisterRequest request
     ) {
-        return ResponseEntity.ok(registrationService.register(request));
+        return registrationService.register(request);
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
+    public AuthenticationResponse authenticate(
             @RequestBody AuthenticationRequest request
     ) {
-        return ResponseEntity.ok(service.authenticate(request));
+        return service.authenticate(request);
     }
 
     @PostMapping("/refresh-token")
