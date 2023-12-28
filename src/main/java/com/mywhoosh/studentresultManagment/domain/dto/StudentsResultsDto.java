@@ -11,12 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class StudentsResultsDto extends AbstractBaseDto {
-    private String resultId;
+
     private String name;
-    private String status;
     private String rollNumber;
-    private String remaks;
+    private String fatherName;
+    private Integer grade;
+    private String status;
+    private String remarks;
     private int totalMarks;
     private int obtainedMarks;
+    private int positionInClass;
 
 }

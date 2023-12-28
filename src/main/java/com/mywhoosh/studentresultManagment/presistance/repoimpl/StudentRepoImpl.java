@@ -40,11 +40,12 @@ public class StudentRepoImpl extends AbstractBaseRepo<StudentEntity, String> imp
         SortOperation sortOperation = Aggregation.sort(Sort.Direction.ASC, "students_results.obtainedMarks");
 
         ProjectionOperation projectionOperation = Aggregation.project()
-                .and("students_results._id").as("resultId")
                 .and("name").as("name")
-                .and("status").as("status")
                 .and("rollNumber").as("rollNumber")
-                .and("students_results.remarks").as("remaks")
+                .and("fatherName").as("fatherName")
+                .and("grade").as("grade")
+                .and("status").as("status")
+                .and("students_results.remarks").as("remarks")
                 .and("students_results.totalMarks").as("totalMarks")
                 .and("students_results.obtainedMarks").as("obtainedMarks");
 

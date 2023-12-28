@@ -2,6 +2,7 @@ package com.mywhoosh.studentresultManagment;
 
 
 import com.mywhoosh.studentresultManagment.domain.repoadapter.StudentRepoAdapter;
+import com.mywhoosh.studentresultManagment.domain.service.StudentResultManagementService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class StudentResultManagementApplication implements CommandLineRunner {
 
     @Autowired
-    StudentRepoAdapter studentRepoAdapter;
+    StudentResultManagementService studentResultManagementService;
 
     public static void main(String[] args) {
         SpringApplication.run(StudentResultManagementApplication.class, args);
@@ -24,6 +25,6 @@ public class StudentResultManagementApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-       // studentRepoAdapter.getActiveStudentsWithResults().forEach(s -> log.info(s.toString()));
+       studentResultManagementService.getStudentsResults().forEach(s -> log.info(s.toString()));
     }
 }

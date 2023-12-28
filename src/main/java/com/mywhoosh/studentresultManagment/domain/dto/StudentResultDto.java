@@ -17,5 +17,5 @@ public class StudentResultDto extends AbstractBaseDto {
     private Double obtainedMarks;
     private Integer rollNumber;
     private RemarkEnum remarks;
-    private Integer PositionInClass;
+
 }

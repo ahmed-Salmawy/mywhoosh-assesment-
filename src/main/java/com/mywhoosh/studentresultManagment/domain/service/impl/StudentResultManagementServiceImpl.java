@@ -1,10 +1,7 @@
 package com.mywhoosh.studentresultManagment.domain.service.impl;
 
 import com.mywhoosh.studentresultManagment.base.AbstractBaseService;
-import com.mywhoosh.studentresultManagment.domain.dto.StudentDto;
-import com.mywhoosh.studentresultManagment.domain.dto.StudentRequestDto;
-import com.mywhoosh.studentresultManagment.domain.dto.StudentResultDto;
-import com.mywhoosh.studentresultManagment.domain.dto.StudentResultRequestDto;
+import com.mywhoosh.studentresultManagment.domain.dto.*;
 import com.mywhoosh.studentresultManagment.domain.enums.RemarkEnum;
 import com.mywhoosh.studentresultManagment.domain.enums.StatusEnum;
 import com.mywhoosh.studentresultManagment.domain.repoadapter.StudentRepoAdapter;
@@ -14,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -54,22 +54,36 @@ public class StudentResultManagementServiceImpl extends AbstractBaseService<Stud
                     .totalMarks(resultRequestDto.getTotalMarks())
                     .build();
             log.info("building up result dto {}", studentResultDto);
-
-
             log.info("saving result to db");
             resultRepoAdapter.create(studentResultDto);
             log.info(" result is saved successfully db");
             return "Result is saved Successfully :)";
-
-
-
-
         } else {
             log.info("student wasn't found in db {} ", resultRequestDto);
-            return "Student is not Registered ";
+            return "Sorry!,Student is not Registered :(";
         }
+    }
+
+    @Override
+    public List<StudentsResultsDto> getStudentsResults() {
+        List<StudentsResultsDto> sortedResults = repoAdapter.getActiveStudentsWithResults();
+        for (int i = 0; i < sortedResults.size(); i++) {
+            sortedResults.get(i).setPositionInClass(i + 1);
+        }
+        return sortedResults;
+    }
+
+    @Override
+    public String deleteStudent(DeleteStudentRequestDto deleteStudentRequestDto) {
+        Optional<StudentDto> studentDto = repoAdapter.findStudentByRollNumberAndGrade(deleteStudentRequestDto);
+        studentDto.ifPresentOrElse(s -> {
+            s.setStatus(StatusEnum.INACTIVE);
+            repoAdapter.update(s);
+            log.info("student deleted successfully");
+        }, () -> log.info("student not Found :("));
 
 
+        return studentDto.isPresent() ? "student deleted successfully" : "student not Found :(";
     }
 
 

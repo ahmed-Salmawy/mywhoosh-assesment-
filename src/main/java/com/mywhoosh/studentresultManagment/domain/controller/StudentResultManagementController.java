@@ -1,10 +1,7 @@
 package com.mywhoosh.studentresultManagment.domain.controller;
 
 import com.mywhoosh.studentresultManagment.base.AbstractBaseController;
-import com.mywhoosh.studentresultManagment.domain.dto.MessageResponseDto;
-import com.mywhoosh.studentresultManagment.domain.dto.StudentDto;
-import com.mywhoosh.studentresultManagment.domain.dto.StudentRequestDto;
-import com.mywhoosh.studentresultManagment.domain.dto.StudentResultRequestDto;
+import com.mywhoosh.studentresultManagment.domain.dto.*;
 import com.mywhoosh.studentresultManagment.domain.service.StudentResultManagementService;
 import jakarta.validation.Valid;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
@@ -54,5 +51,12 @@ public class StudentResultManagementController extends AbstractBaseController<St
         return new MessageResponseDto(service.saveStudentResult(resultRequestDto));
     }
 
+
+    @MessageMapping("/delete-student")
+    @SendTo("/topic/students")
+    public MessageResponseDto deleteStudent(DeleteStudentRequestDto deleteStudentRequestDto) throws Exception {
+
+        return new MessageResponseDto(service.deleteStudent(deleteStudentRequestDto));
+    }
 
 }

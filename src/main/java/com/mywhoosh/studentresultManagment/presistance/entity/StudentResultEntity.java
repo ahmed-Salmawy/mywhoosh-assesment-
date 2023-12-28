@@ -17,7 +17,7 @@ public class StudentResultEntity extends AbstractBaseEntity {
     private Integer rollNumber;
     private Integer grade;
     private RemarkEnum remarks;
-    private Integer PositionInClass;
+
 
     @Override
 

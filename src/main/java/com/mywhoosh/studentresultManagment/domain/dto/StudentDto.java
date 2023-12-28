@@ -19,6 +19,7 @@ public class StudentDto extends AbstractBaseDto {
     private String fatherName;
     private Integer grade;
     private StatusEnum status=StatusEnum.ACTIVE;
+    private int positionInClass;
 
 
 }
