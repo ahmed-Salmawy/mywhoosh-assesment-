@@ -1,7 +1,7 @@
 package com.mywhoosh.studentresultManagment.security.filter;
 
 
-import com.mywhoosh.studentresultManagment.security.config.JwtService;
+import com.mywhoosh.studentresultManagment.security.service.JwtService;
 import com.mywhoosh.studentresultManagment.security.repoadapter.UserTokenRepoAdapter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -28,7 +28,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
-    private final UserTokenRepoAdapter tokenRepository;
 
     @Override
     protected void doFilterInternal(
@@ -53,7 +52,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         username = jwtService.extractUsername(jwt);
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-            var isTokenValid = tokenRepository.findByToken(jwt)
+            var isTokenValid = jwtService.findByToken(jwt)
                     .map(t -> !t.isExpired() && !t.isRevoked())
                     .orElse(false);
             if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {

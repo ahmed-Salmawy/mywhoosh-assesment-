@@ -1,7 +1,6 @@
 package com.mywhoosh.studentresultManagment.security.service.impl;
 
 import com.mywhoosh.studentresultManagment.base.AbstractBaseService;
-import com.mywhoosh.studentresultManagment.security.config.JwtService;
 import com.mywhoosh.studentresultManagment.security.dto.AuthenticationResponse;
 import com.mywhoosh.studentresultManagment.security.dto.RegisterRequest;
 import com.mywhoosh.studentresultManagment.security.dto.TokenDto;
@@ -19,14 +18,14 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class UserRegistrationServiceImpl  extends AbstractBaseService<UserDto, UserRepoAdapter> implements UserRegistrationService {
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtServiceImpl;
     private final UserTokenRepoAdapter tokenRepoAdapter;
 
     @Autowired
-    protected UserRegistrationServiceImpl(UserRepoAdapter repoAdapter, PasswordEncoder passwordEncoder, JwtService jwtService, UserTokenRepoAdapter tokenRepoAdapter) {
+    protected UserRegistrationServiceImpl(UserRepoAdapter repoAdapter, PasswordEncoder passwordEncoder, JwtServiceImpl jwtServiceImpl, UserTokenRepoAdapter tokenRepoAdapter) {
         super(repoAdapter);
         this.passwordEncoder = passwordEncoder;
-        this.jwtService = jwtService;
+        this.jwtServiceImpl = jwtServiceImpl;
         this.tokenRepoAdapter = tokenRepoAdapter;
     }
 
@@ -41,8 +40,8 @@ public class UserRegistrationServiceImpl  extends AbstractBaseService<UserDto, U
         String id = repoAdapter.create(user);
         user.setId(id);
 
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
+        var jwtToken = jwtServiceImpl.generateToken(user);
+        var refreshToken = jwtServiceImpl.generateRefreshToken(user);
 
         saveUserToken(user, jwtToken);
 

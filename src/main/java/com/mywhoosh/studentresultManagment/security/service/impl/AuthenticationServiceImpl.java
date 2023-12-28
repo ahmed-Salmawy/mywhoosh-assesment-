@@ -2,7 +2,6 @@ package com.mywhoosh.studentresultManagment.security.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mywhoosh.studentresultManagment.base.AbstractBaseService;
-import com.mywhoosh.studentresultManagment.security.config.JwtService;
 import com.mywhoosh.studentresultManagment.security.dto.AuthenticationRequest;
 import com.mywhoosh.studentresultManagment.security.dto.AuthenticationResponse;
 import com.mywhoosh.studentresultManagment.security.dto.TokenDto;
@@ -26,7 +25,7 @@ import java.util.Optional;
 @Slf4j
 public class AuthenticationServiceImpl extends AbstractBaseService<TokenDto, UserTokenRepoAdapter> implements AuthenticationService {
 
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtServiceImpl;
     private final AuthenticationManager authenticationManager;
     private final UserRepoAdapter userRepoAdapter;
 
@@ -34,9 +33,9 @@ public class AuthenticationServiceImpl extends AbstractBaseService<TokenDto, Use
     private final UserTokenRepoAdapter tokenRepository;
 
 
-    protected AuthenticationServiceImpl(UserTokenRepoAdapter tokenRepoAdapter, JwtService jwtService, AuthenticationManager authenticationManager, UserRepoAdapter userRepoAdapter, UserDetailsService userDetailsService, UserTokenRepoAdapter tokenRepository) {
+    protected AuthenticationServiceImpl(UserTokenRepoAdapter tokenRepoAdapter, JwtServiceImpl jwtServiceImpl, AuthenticationManager authenticationManager, UserRepoAdapter userRepoAdapter, UserDetailsService userDetailsService, UserTokenRepoAdapter tokenRepository) {
         super(tokenRepoAdapter);
-        this.jwtService = jwtService;
+        this.jwtServiceImpl = jwtServiceImpl;
         this.authenticationManager = authenticationManager;
         this.userRepoAdapter = userRepoAdapter;
         this.userDetailsService = userDetailsService;
@@ -55,8 +54,8 @@ public class AuthenticationServiceImpl extends AbstractBaseService<TokenDto, Use
 
         var user = userRepoAdapter.getUser(request.getUsername());
 
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
+        var jwtToken = jwtServiceImpl.generateToken(user);
+        var refreshToken = jwtServiceImpl.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
@@ -98,11 +97,11 @@ public class AuthenticationServiceImpl extends AbstractBaseService<TokenDto, Use
             return;
         }
         refreshToken = authHeader.substring(7);
-        Optional.ofNullable(jwtService.extractUsername(refreshToken))
+        Optional.ofNullable(jwtServiceImpl.extractUsername(refreshToken))
                 .ifPresent(username -> {
                     UserDto user = this.userRepoAdapter.getUser(username);
-                    if (jwtService.isTokenValid(refreshToken, user)) {
-                        var accessToken = jwtService.generateToken(user);
+                    if (jwtServiceImpl.isTokenValid(refreshToken, user)) {
+                        var accessToken = jwtServiceImpl.generateToken(user);
                         revokeAllUserTokens(user);
                         saveUserToken(user, accessToken);
 
