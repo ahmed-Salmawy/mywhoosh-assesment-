@@ -1,18 +1,20 @@
-
- const jwtToken = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzAzNjk2MTczLCJleHAiOjE3MDM3ODI1NzN9.EMU6oXsN8FHWp29meNs-6DztRMT0DAfkTI8793F-Fs4';
-
- const stompClient = new StompJs.Client({
-        brokerURL: 'ws://localhost:8080/mywhoosh-websocket',
-        connectHeaders: {
-            Authorization: jwtToken
-        }
-    });
-
-
+const stompClient = new StompJs.Client({
+    brokerURL: 'ws://localhost:8080/mywhoosh-websocket?token=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzAzNzkwMDIyLCJleHAiOjE3MDM4NzY0MjJ9.0o2F7J9onWq-iY49Ng4BZQnLc2wMnj8xY35ybuXoW1s',
+    connectHeaders: {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzAzNzkwMDIyLCJleHAiOjE3MDM4NzY0MjJ9.0o2F7J9onWq-iY49Ng4BZQnLc2wMnj8xY35ybuXoW1s"
+    },
+    debug: function (str) {
+        console.log(str);
+    },
+    reconnectDelay: 5000,
+    heartbeatIncoming: 4000,
+    heartbeatOutgoing: 4000,
+});
 
 stompClient.onConnect = (frame) => {
     setConnected(true);
     console.log('Connected: ' + frame);
+
     stompClient.subscribe('/topic/students', (greeting) => {
         showGreeting(JSON.parse(greeting.body).content);
     });
@@ -52,10 +54,11 @@ function disconnect() {
 function addStudent() {
     stompClient.publish({
         destination: "/app/student",
-        body: JSON.stringify({'name': $("#name").val(),
-        'rollNumber': $("#rollNumber").val(),
-        'fatherName': $("#fathersName").val(),
-        'grade': $("#grade").val()
+        body: JSON.stringify({
+            'name': $("#name").val(),
+            'rollNumber': $("#rollNumber").val(),
+            'fatherName': $("#fathersName").val(),
+            'grade': $("#grade").val()
         })
     });
 }
@@ -63,9 +66,10 @@ function addStudent() {
 function saveResult() {
     stompClient.publish({
         destination: "/app/result",
-        body: JSON.stringify({'totalMarks': $("#totalMarks").val(),
-        'obtainedMarks': $("#obtainedMarks").val(),
-        'rollNumber': $("#resultRollNumber").val()
+        body: JSON.stringify({
+            'totalMarks': $("#totalMarks").val(),
+            'obtainedMarks': $("#obtainedMarks").val(),
+            'rollNumber': $("#resultRollNumber").val()
         })
     });
 }
@@ -76,9 +80,9 @@ function showGreeting(message) {
 
 $(function () {
     $("form").on('submit', (e) => e.preventDefault());
-    $( "#connect" ).click(() => connect());
-    $( "#disconnect" ).click(() => disconnect());
-    $( "#addStudent" ).click(() => addStudent());
-    $( "#saveResult" ).click(() => saveResult());
+    $("#connect").click(() => connect());
+    $("#disconnect").click(() => disconnect());
+    $("#addStudent").click(() => addStudent());
+    $("#saveResult").click(() => saveResult());
 });
 

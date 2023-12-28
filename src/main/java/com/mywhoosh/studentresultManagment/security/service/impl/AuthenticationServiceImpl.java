@@ -16,6 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -29,11 +33,17 @@ public class AuthenticationServiceImpl extends AbstractBaseService<TokenDto, Use
     private final AuthenticationManager authenticationManager;
     private final UserRepoAdapter userRepoAdapter;
 
-    protected AuthenticationServiceImpl(UserTokenRepoAdapter tokenRepoAdapter, JwtService jwtService, AuthenticationManager authenticationManager, UserRepoAdapter userRepoAdapter) {
+    private final UserDetailsService userDetailsService;
+    private final UserTokenRepoAdapter tokenRepository;
+
+
+    protected AuthenticationServiceImpl(UserTokenRepoAdapter tokenRepoAdapter, JwtService jwtService, AuthenticationManager authenticationManager, UserRepoAdapter userRepoAdapter, UserDetailsService userDetailsService, UserTokenRepoAdapter tokenRepository) {
         super(tokenRepoAdapter);
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
         this.userRepoAdapter = userRepoAdapter;
+        this.userDetailsService = userDetailsService;
+        this.tokenRepository = tokenRepository;
     }
 
 
@@ -114,4 +124,6 @@ public class AuthenticationServiceImpl extends AbstractBaseService<TokenDto, Use
                 });
 
     }
+
+
 }

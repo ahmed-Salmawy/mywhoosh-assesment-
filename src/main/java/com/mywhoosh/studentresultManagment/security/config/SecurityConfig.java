@@ -27,7 +27,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
-
+// /mywhoosh-websocket*"
     private static final String[] WHITE_LIST_URL = {"/mywhoosh-websocket*","/api/v1/auth/**","/index.html","/main.cs","/app.js","/favicon.ico "};
 
     @Bean

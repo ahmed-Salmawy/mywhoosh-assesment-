@@ -3,10 +3,7 @@ package com.mywhoosh.studentresultManagment.domain.controller;
 import com.mywhoosh.studentresultManagment.base.AbstractBaseController;
 import com.mywhoosh.studentresultManagment.domain.dto.StudentsResultsDto;
 import com.mywhoosh.studentresultManagment.domain.service.StudentResultManagementService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,11 @@ public class StudentResultController extends AbstractBaseController<StudentResul
     public StudentsResultsDto getStudentResult(@PathVariable("rollNumber") Integer rollNumber) {
         return service.getStudentResults(rollNumber);
     }
+
+
+
+
+
+
 
 }

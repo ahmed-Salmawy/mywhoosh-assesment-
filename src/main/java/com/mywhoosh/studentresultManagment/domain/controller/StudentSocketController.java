@@ -3,23 +3,24 @@ package com.mywhoosh.studentresultManagment.domain.controller;
 import com.mywhoosh.studentresultManagment.base.AbstractBaseController;
 import com.mywhoosh.studentresultManagment.domain.dto.*;
 import com.mywhoosh.studentresultManagment.domain.service.StudentResultManagementService;
+import com.mywhoosh.studentresultManagment.security.service.AuthenticationService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.util.HtmlUtils;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
-public class StudentResultManagementController extends AbstractBaseController<StudentResultManagementService> {
-    public StudentResultManagementController(StudentResultManagementService service) {
+public class StudentSocketController extends AbstractBaseController<StudentResultManagementService> {
+    public StudentSocketController(StudentResultManagementService service) {
         super(service);
     }
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
 
     @MessageMapping("/student")
@@ -58,5 +59,6 @@ public class StudentResultManagementController extends AbstractBaseController<St
 
         return new MessageResponseDto(service.deleteStudent(deleteStudentRequestDto));
     }
+
 
 }
