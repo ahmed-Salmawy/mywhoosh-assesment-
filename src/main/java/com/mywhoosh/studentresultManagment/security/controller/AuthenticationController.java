@@ -3,7 +3,9 @@ package com.mywhoosh.studentresultManagment.security.controller;
 import com.mywhoosh.studentresultManagment.base.AbstractBaseController;
 import com.mywhoosh.studentresultManagment.security.dto.AuthenticationRequest;
 import com.mywhoosh.studentresultManagment.security.dto.AuthenticationResponse;
+import com.mywhoosh.studentresultManagment.security.dto.RegisterRequest;
 import com.mywhoosh.studentresultManagment.security.service.AuthenticationService;
+import com.mywhoosh.studentresultManagment.security.service.UserRegistrationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +20,20 @@ import java.io.IOException;
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController extends AbstractBaseController<AuthenticationService> {
 
+    private final UserRegistrationService registrationService;
 
-    public AuthenticationController(AuthenticationService service) {
+    public AuthenticationController(AuthenticationService service, UserRegistrationService registrationService) {
         super(service);
+        this.registrationService = registrationService;
     }
 
-    /*  @PostMapping("/register")
-      public ResponseEntity<AuthenticationResponse> register(
-          @RequestBody RegisterRequest request
-      ) {
-        return ResponseEntity.ok(service.register(request));
-      }*/
+    @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> register(
+            @RequestBody RegisterRequest request
+    ) {
+        return ResponseEntity.ok(registrationService.register(request));
+    }
+
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
