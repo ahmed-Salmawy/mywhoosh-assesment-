@@ -8,7 +8,6 @@ import com.mywhoosh.studentresultManagment.security.repo.TokenRepository;
 import com.mywhoosh.studentresultManagment.security.repoadapter.UserTokenRepoAdapter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,20 +28,12 @@ public class UserTokenRepoAdapterImpl extends
         return repository.save(tokenEntity).getId();
     }
 
-    @Override
-    public void update(TokenDto dto) {
-
-    }
 
     @Override
     public void delete(TokenDto dto) {
 
     }
 
-    @Override
-    public TokenDto retrieve(String id) {
-        return null;
-    }
 
     @Override
     public List<TokenDto> findAllValidTokenByUser(String userId) {

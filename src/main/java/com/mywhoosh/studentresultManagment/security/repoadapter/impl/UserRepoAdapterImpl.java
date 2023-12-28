@@ -2,10 +2,10 @@ package com.mywhoosh.studentresultManagment.security.repoadapter.impl;
 
 
 import com.mywhoosh.studentresultManagment.base.AbstractBaseRepoAdapter;
+import com.mywhoosh.studentresultManagment.presistance.entity.UserEntity;
 import com.mywhoosh.studentresultManagment.security.dto.UserDto;
 import com.mywhoosh.studentresultManagment.security.mapper.UserMapper;
 import com.mywhoosh.studentresultManagment.security.repo.UserRepository;
-import com.mywhoosh.studentresultManagment.presistance.entity.UserEntity;
 import com.mywhoosh.studentresultManagment.security.repoadapter.UserRepoAdapter;
 import org.springframework.stereotype.Repository;
 
@@ -21,28 +21,27 @@ public class UserRepoAdapterImpl
 
     }
 
+/*
     @Override
     public String create(UserDto userDto) {
         UserEntity user = mapper.toEntity(userDto);
         return repository.save(user).getId();
     }
+*/
 
-    @Override
-    public void update(UserDto dto) {
 
-    }
 
     @Override
     public void delete(UserDto dto) {
 
     }
 
-    public UserDto retrieve(String id) {
-        return repository.findById(id).map(mapper::toDto).orElse(new UserDto());
-    }
+  /*  public Optional<UserDto> retrieve(String id) {
+        return Optional.of(repository.findById(id).map(mapper::toDto).orElse(new UserDto()));
+    }*/
 
     @Override
-    public Optional<UserDto> getUser(String username) {
-        return (repository.findByUsername(username)).map(mapper::toDto).or(null);
+    public UserDto getUser(String username) {
+        return repository.findByUsername(username).map(mapper::toDto).orElse(null);
     }
 }

@@ -3,7 +3,6 @@ package com.mywhoosh.studentresultManagment.presistance.entity;
 
 import com.mywhoosh.studentresultManagment.base.AbstractBaseEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;

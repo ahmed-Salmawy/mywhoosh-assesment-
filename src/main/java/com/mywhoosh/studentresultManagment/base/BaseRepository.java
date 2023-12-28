@@ -11,7 +11,7 @@ public interface BaseRepository<E extends AbstractBaseEntity,ID> {
 
     List<E> findAll(List<ID> ids);
 
-    E findOne(ID id);
+    E findById(ID id);
 
     long count();
 

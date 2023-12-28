@@ -46,8 +46,8 @@ public class AuthenticationServiceImpl extends AbstractBaseService<TokenDto, Use
                 )
         );
 
-        var user = userRepoAdapter.getUser(request.getUsername())
-                .orElseThrow();
+        var user = userRepoAdapter.getUser(request.getUsername());
+
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
@@ -93,8 +93,7 @@ public class AuthenticationServiceImpl extends AbstractBaseService<TokenDto, Use
         refreshToken = authHeader.substring(7);
         Optional.ofNullable(jwtService.extractUsername(refreshToken))
                 .ifPresent(username -> {
-                    UserDto user = this.userRepoAdapter.getUser(username)
-                            .orElseThrow();
+                    UserDto user = this.userRepoAdapter.getUser(username);
                     if (jwtService.isTokenValid(refreshToken, user)) {
                         var accessToken = jwtService.generateToken(user);
                         revokeAllUserTokens(user);

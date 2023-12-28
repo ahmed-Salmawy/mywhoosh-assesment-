@@ -5,7 +5,6 @@ import com.mywhoosh.studentresultManagment.presistance.entity.UserEntity;
 import com.mywhoosh.studentresultManagment.security.dto.UserDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 @Component
 public class UserMapper implements BaseMapper<UserEntity, UserDto> {

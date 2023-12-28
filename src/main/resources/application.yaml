@@ -12,3 +12,7 @@ spring:
       database: students
       host: localhost
       port: 27017
+
+logging:
+  level:
+    org.springframework: DEBUG

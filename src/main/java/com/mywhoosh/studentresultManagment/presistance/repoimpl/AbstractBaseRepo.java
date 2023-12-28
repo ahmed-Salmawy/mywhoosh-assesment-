@@ -6,7 +6,6 @@ import com.mongodb.TransactionOptions;
 import com.mongodb.WriteConcern;
 import com.mywhoosh.studentresultManagment.base.AbstractBaseEntity;
 import com.mywhoosh.studentresultManagment.base.BaseRepository;
-import com.mywhoosh.studentresultManagment.base.SequenceGenerator;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -27,7 +26,7 @@ public abstract class AbstractBaseRepo<E extends AbstractBaseEntity, ID> impleme
             .build();
 
 
-    private final MongoTemplate mongoTemplate;
+    protected final MongoTemplate mongoTemplate;
 
 
     protected AbstractBaseRepo(Class<E> entityTypeClass, MongoTemplate mongoTemplate) {
@@ -61,7 +60,7 @@ public abstract class AbstractBaseRepo<E extends AbstractBaseEntity, ID> impleme
     }
 
     @Override
-    public E findOne(ID id) {
+    public E findById(ID id) {
         Query query = new Query(Criteria.where("_id").is(id));
         return mongoTemplate.findOne(query, entityTypeClass);
 
