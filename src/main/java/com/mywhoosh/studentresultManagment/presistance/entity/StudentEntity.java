@@ -3,16 +3,17 @@ package com.mywhoosh.studentresultManagment.presistance.entity;
 import com.mywhoosh.studentresultManagment.base.AbstractBaseEntity;
 import com.mywhoosh.studentresultManagment.domain.enums.StatusEnum;
 import lombok.Data;
+import lombok.experimental.FieldNameConstants;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Data
 @Document("students")
+@FieldNameConstants
 public class StudentEntity extends AbstractBaseEntity {
 
-    @Id
-    private String id;
+
     private String name;
     private Integer rollNumber;
     private String fatherName;

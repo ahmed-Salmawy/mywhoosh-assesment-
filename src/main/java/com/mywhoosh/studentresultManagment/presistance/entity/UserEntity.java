@@ -6,12 +6,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-
 @Document("users")
 @Data
-public class UserEntity extends AbstractBaseEntity  {
-    @Id
-    private String id;
+public class UserEntity extends AbstractBaseEntity {
+
     private String username;
     private String password;
 

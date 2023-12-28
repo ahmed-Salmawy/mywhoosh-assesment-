@@ -4,6 +4,7 @@ import com.mywhoosh.studentresultManagment.base.AbstractBaseController;
 import com.mywhoosh.studentresultManagment.domain.dto.MessageResponseDto;
 import com.mywhoosh.studentresultManagment.domain.dto.StudentDto;
 import com.mywhoosh.studentresultManagment.domain.dto.StudentRequestDto;
+import com.mywhoosh.studentresultManagment.domain.dto.StudentResultRequestDto;
 import com.mywhoosh.studentresultManagment.domain.service.StudentResultManagementService;
 import jakarta.validation.Valid;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
@@ -48,9 +49,9 @@ public class StudentResultManagementController extends AbstractBaseController<St
 
     @MessageMapping("/result")
     @SendTo("/topic/students")
-    public MessageResponseDto saveResult(StudentDto studentDto) throws Exception {
-        Thread.sleep(1000); // simulated delay
-        return new MessageResponseDto("Student, " + HtmlUtils.htmlEscape(studentDto.toString()) + "!");
+    public MessageResponseDto saveResult(StudentResultRequestDto resultRequestDto) throws Exception {
+
+        return new MessageResponseDto(service.saveStudentResult(resultRequestDto));
     }
 
 

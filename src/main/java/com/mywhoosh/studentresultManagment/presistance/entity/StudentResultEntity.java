@@ -10,8 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document("results")
 public class StudentResultEntity extends AbstractBaseEntity {
-    @Id
-    private String Id;
+
 
     private Double totalMarks;
     private Double obtainedMarks;

@@ -12,8 +12,7 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 @Data
 public class TokenEntity extends AbstractBaseEntity {
 
-    @Id
-    private String id;
+
     private String token;
     private String username;
     boolean expired;

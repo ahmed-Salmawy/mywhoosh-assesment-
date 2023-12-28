@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.data.mongodb.core.FindAndReplaceOptions.options;
 import static org.springframework.data.mongodb.core.query.Query.query;
@@ -63,7 +64,20 @@ public abstract class AbstractBaseRepo<E extends AbstractBaseEntity, ID> impleme
     public E findById(ID id) {
         Query query = new Query(Criteria.where("_id").is(id));
         return mongoTemplate.findOne(query, entityTypeClass);
+    }
 
+    @Override
+    public E findOneByMap(Map<String, Object> parameters) {
+        Query query = new Query();
+        parameters.forEach((key, value) -> query.addCriteria(Criteria.where(key).is(value)));
+        return mongoTemplate.findOne(query, entityTypeClass);
+    }
+
+    @Override
+    public List<E> findManyByMap(Map<String, Object> parameters) {
+        Query query = new Query();
+        parameters.forEach((key, value) -> query.addCriteria(Criteria.where(key).is(value)));
+        return mongoTemplate.find(query, entityTypeClass);
     }
 
     @Override

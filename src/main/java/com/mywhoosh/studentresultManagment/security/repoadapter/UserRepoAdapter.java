@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface UserRepoAdapter extends BaseRepoAdapter<UserDto> {
 
     UserDto getUser(String username);
+
 }
