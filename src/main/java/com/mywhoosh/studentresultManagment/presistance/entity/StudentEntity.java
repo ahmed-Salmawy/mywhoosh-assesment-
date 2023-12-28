@@ -4,7 +4,6 @@ import com.mywhoosh.studentresultManagment.base.AbstractBaseEntity;
 import com.mywhoosh.studentresultManagment.domain.enums.StatusEnum;
 import lombok.Data;
 import lombok.experimental.FieldNameConstants;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 

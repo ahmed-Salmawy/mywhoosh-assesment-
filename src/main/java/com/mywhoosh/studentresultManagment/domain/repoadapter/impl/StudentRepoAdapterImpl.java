@@ -10,7 +10,10 @@ import com.mywhoosh.studentresultManagment.domain.repoadapter.StudentRepoAdapter
 import com.mywhoosh.studentresultManagment.presistance.entity.StudentEntity;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public class StudentRepoAdapterImpl extends AbstractBaseRepoAdapter

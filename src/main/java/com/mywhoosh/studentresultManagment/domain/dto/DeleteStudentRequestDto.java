@@ -3,7 +3,6 @@ package com.mywhoosh.studentresultManagment.domain.dto;
 import com.mywhoosh.studentresultManagment.base.AbstractBaseDto;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

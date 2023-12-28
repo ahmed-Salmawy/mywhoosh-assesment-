@@ -1,17 +1,17 @@
 package com.mywhoosh.studentresultManagment.domain.controller;
 
 import com.mywhoosh.studentresultManagment.base.AbstractBaseController;
-import com.mywhoosh.studentresultManagment.domain.dto.*;
+import com.mywhoosh.studentresultManagment.domain.dto.DeleteStudentRequestDto;
+import com.mywhoosh.studentresultManagment.domain.dto.MessageResponseDto;
+import com.mywhoosh.studentresultManagment.domain.dto.StudentRequestDto;
+import com.mywhoosh.studentresultManagment.domain.dto.StudentResultRequestDto;
 import com.mywhoosh.studentresultManagment.domain.service.StudentResultManagementService;
 import com.mywhoosh.studentresultManagment.security.service.AuthenticationService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class StudentSocketController extends AbstractBaseController<StudentResultManagementService> {

@@ -1,7 +1,6 @@
 package com.mywhoosh.studentresultManagment.security.repoadapter.impl;
 
 import com.mywhoosh.studentresultManagment.base.AbstractBaseRepoAdapter;
-import com.mywhoosh.studentresultManagment.presistance.entity.StudentEntity;
 import com.mywhoosh.studentresultManagment.presistance.entity.TokenEntity;
 import com.mywhoosh.studentresultManagment.security.dto.TokenDto;
 import com.mywhoosh.studentresultManagment.security.mapper.TokenMapper;
@@ -9,7 +8,6 @@ import com.mywhoosh.studentresultManagment.security.repo.TokenRepository;
 import com.mywhoosh.studentresultManagment.security.repoadapter.UserTokenRepoAdapter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,7 +1,6 @@
 package com.mywhoosh.studentresultManagment;
 
 
-import com.mywhoosh.studentresultManagment.domain.repoadapter.StudentRepoAdapter;
 import com.mywhoosh.studentresultManagment.domain.service.StudentResultManagementService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -9,8 +9,6 @@ import com.mywhoosh.studentresultManagment.security.repo.UserRepository;
 import com.mywhoosh.studentresultManagment.security.repoadapter.UserRepoAdapter;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
 public class UserRepoAdapterImpl
         extends AbstractBaseRepoAdapter<UserEntity, UserDto, UserMapper, UserRepository> implements
