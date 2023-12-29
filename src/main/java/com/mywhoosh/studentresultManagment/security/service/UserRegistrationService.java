@@ -6,5 +6,5 @@ import com.mywhoosh.studentresultManagment.security.dto.RegisterRequest;
 
 public interface UserRegistrationService extends BaseService {
 
-    public AuthenticationResponse register(RegisterRequest request);
+    AuthenticationResponse register(RegisterRequest request);
 }

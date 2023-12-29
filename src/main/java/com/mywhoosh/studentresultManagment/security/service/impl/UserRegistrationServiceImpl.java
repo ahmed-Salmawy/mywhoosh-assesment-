@@ -52,7 +52,8 @@ public class UserRegistrationServiceImpl  extends AbstractBaseService<UserDto, U
     }
 
 
-    protected void saveUserToken(UserDto user, String jwtToken) {
+
+    private void saveUserToken(UserDto user, String jwtToken) {
         TokenDto token = TokenDto.builder()
                 .user(user)
                 .token(jwtToken)

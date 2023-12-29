@@ -21,7 +21,7 @@ public class StudentResultRepoAdapterImpl
 
     @Override
     public void delete(StudentResultDto dto) {
-
+        repository.delete(dto.getId());
     }
 
 
