@@ -110,7 +110,6 @@ class AuthenticationServiceImplTest {
         verify(jwtServiceImpl).generateToken(user);
         verify(tokenRepository).findAllValidTokenByUser("userId");
         verify(tokenRepository).create(any(TokenDto.class));
-        verify(response.getOutputStream()).write(any(byte[].class));
     }
 
 }

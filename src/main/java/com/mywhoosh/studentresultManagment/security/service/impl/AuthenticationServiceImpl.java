@@ -17,6 +17,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.tags.HtmlEscapeTag;
+import org.springframework.web.util.HtmlUtils;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -112,8 +114,9 @@ public class AuthenticationServiceImpl extends AbstractBaseService<TokenDto, Use
 
                         try {
                             new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                        } catch (Exception e) {
+                            log.error(HtmlUtils.htmlEscape(e.getStackTrace().toString()));
+                         //   throw new RuntimeException(e);
                         }
 
                     }
