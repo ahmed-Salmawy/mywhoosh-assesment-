@@ -78,7 +78,7 @@ public class StudentResultManagementApplication implements CommandLineRunner {
                 .build();
         StudentRequestDto student6 = StudentRequestDto.builder()
                 .name("ahmed")
-                .rollNumber(5)
+                .rollNumber(6)
                 .fatherName("elsalmawy")
                 .grade(5)
                 .build();
