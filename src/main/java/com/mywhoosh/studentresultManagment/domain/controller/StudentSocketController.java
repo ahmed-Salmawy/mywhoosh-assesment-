@@ -29,20 +29,7 @@ public class StudentSocketController extends AbstractBaseController<StudentResul
         String result = service.addNewStudent(requestDto);
         return new MessageResponseDto(result);
     }
-   /* @MessageExceptionHandler(MethodArgumentNotValidException.class)
-    @SendToUser("/queue/errors")
-    public MessageResponseDto handleValidationException(MethodArgumentNotValidException ex) {
-        // Log or handle the validation exception as needed
-        // You can access the validation errors using ex.getBindingResult()
 
-        List<String> errorMessages = ex.getBindingResult()
-                .getFieldErrors()
-                .stream()
-                .map(error -> error.getDefaultMessage())
-                .collect(Collectors.toList());
-
-        return new MessageResponseDto("Validation failed".concat(errorMessages.toString()));
-    }*/
 
 
     @MessageMapping("/result")
